@@ -1,5 +1,5 @@
 name: js CI
-defauts:
+defaults:
   run:
     working-directory: js
 
