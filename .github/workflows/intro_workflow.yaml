@@ -1,13 +1,15 @@
-name: practice-github-workflow
-on: [push]
+name: Heroku-Deploy
+on:
+  push:
+    branches:
+      - dev
 jobs:
-  check-bats-version:
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: chabad360/htmlproofer@master
+      - uses: CDNievas/heroku-action@v1.0 # This action is not certified by GitHub
         with:
-         directory: "./portfolio"			
-      - run: npm install -g bats
-      - run: bats -v 
- 
+          heroku_email: "profturyahabwa@email.com"
+          heroku_api_key: ${{secrets.a106c641-8e9d-4b32-b66f-3e84a006e379}}
+          heroku_app_name: "templateportfolio"
