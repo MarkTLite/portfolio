@@ -1,5 +1,5 @@
 {
     "scripts": {
-      "test": "node component.js"
+      "test": "jest --env=jsdom"
     }
   }
