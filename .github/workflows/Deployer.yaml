@@ -9,6 +9,13 @@ jobs:
     steps:
       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
       - uses: actions/checkout@v2
+      - run: git checkout dev      
+      - name: Login to Heroku 
+        env: 
+             HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+        run: heroku login 
+      - name: Build and push
+        env:
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
       - run: heroku git:remote -a polar-stream-14955
-      - run: git remote -v 
-      - run: git push heroku dev 
+      - run: git push heroku 
