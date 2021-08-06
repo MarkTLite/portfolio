@@ -1,0 +1,17 @@
+name: Deploy to Heroku
+on: 
+  push:
+    branches:
+      - dev
+  pull-request:
+    branches:
+      - dev    	 	
+jobs:
+  Deployer:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
+      - uses: actions/checkout@v2      
+      - run: git checkout dev
+      - run: heroku git:remote -a polar-stream-14955
+      - run: git push heroku main push heroku main
