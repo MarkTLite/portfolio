@@ -17,8 +17,8 @@ jobs:
       - name: Build and push
         env:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-        run: heroku git:remote -a polar-stream-14955
+        run: git remote add polar-stream-14955 https://git.heroku.com/polar-stream-14955.git
       - name: Build and push
         env:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}             
-        run: git push heroku dev
+        run: git push polar-stream-1495
