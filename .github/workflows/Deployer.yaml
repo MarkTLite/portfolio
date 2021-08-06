@@ -10,4 +10,5 @@ jobs:
       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
       - uses: actions/checkout@v2      
       - run: git checkout dev
+      - run: git remote -v 
       - run: git push heroku dev 
