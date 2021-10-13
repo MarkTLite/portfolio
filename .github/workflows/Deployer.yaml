@@ -20,6 +20,6 @@ jobs:
         run: heroku git:remote -a polar-stream-14955
       - name: Build and push                     
         run: 
-          git config --global user.email "profturyahabwa@gmail.com"
-          |git config --global user.name "MarkTLite"
+          touch .netrc
+          |echo "machine git.heroku.com\n login MarkTLite\n password "+${{ secrets.HEROKU_API_KEY }} >> .netrc          
           |git push heroku dev       
