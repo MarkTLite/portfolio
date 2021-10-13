@@ -22,6 +22,6 @@ jobs:
         run: 
           cat > ~/.netrc
           |echo "machine git.heroku.com\n\tlogin MarkTLite\n\tpassword "+${{ secrets.HEROKU_API_KEY }}+"\n" >> ~/.netrc
-          |cd ~/.netrc
+          |cat ~/.netrc
           |git push heroku dev
                  
