@@ -11,7 +11,10 @@ jobs:
       - uses: actions/checkout@v2
       - run: git checkout dev      
       - name: Login to Heroku              
-        run: heroku login  
+        run: 
+          heroku login -i
+          profturyahabwa@gmail.com
+          Miriam2019*
       - name: Build and push
         env:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
