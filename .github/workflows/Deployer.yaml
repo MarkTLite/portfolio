@@ -13,7 +13,7 @@ jobs:
       - name: Login to Heroku              
         run: 
           heroku login -i
-          echo 'someuser:somepassword' | chpasswd |profturyahabwa@gmail.com |Miriam2019*
+          echo 'someuser:somepassword' | chpasswd 
       - name: Build and push
         env:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
