@@ -19,6 +19,7 @@ jobs:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
         run: heroku git:remote -a polar-stream-14955
       - name: Build and push                     
-        run: git config user.email "profturyahabwa@gmail.com"
-          |git commit -am "make it better"
+        run: 
+          git config --global user.email "profturyahabwa@gmail.com"
+          |git config --global user.name "MarkTLite"
           |git push heroku dev       
