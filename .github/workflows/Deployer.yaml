@@ -10,10 +10,11 @@ jobs:
       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
       - uses: actions/checkout@v2
       - run: git checkout dev      
-      - name: Login to Heroku              
-        run: 
-          heroku login -i
-          |echo 'someuser:somepassword' | chpasswd 
+      - name: Login to Heroku 
+        env: 
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+        run: heroku auth:token
+          |cat ~/.netrc         
       - name: Build and push
         env:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
