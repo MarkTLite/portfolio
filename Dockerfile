@@ -14,5 +14,5 @@ RUN composer install \
 FROM trafex/php-nginx
 COPY --chown=nginx --from=composer /app /var/www/html
 
-CMD sed -i "s/Listen 80/Listen ${PORT:-80}/g" /etc/apache2/ports.conf
+CMD sed -i "s/Listen 80/Listen ${PORT:-80}/g" /etc/apache2/sites-available/000-default.conf /etc/apache2/ports.conf && docker-php-entrypoint apache2-foreground
 
