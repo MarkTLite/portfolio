@@ -1,5 +1,7 @@
 FROM composer AS composer
 
+ENV $PORT
+
 # copying the source directory and install the dependencies with composer
 COPY ./ /app
 
@@ -13,5 +15,3 @@ RUN composer install \
 # dependencies downloaded by composer
 FROM trafex/php-nginx
 COPY --chown=nginx --from=composer /app /var/www/html
-
-CMD sed -i “s/80/${PORT}/g” ./000-default.conf
