@@ -14,4 +14,4 @@ RUN composer install \
 FROM trafex/php-nginx
 COPY --chown=nginx --from=composer /app /var/www/html
 
-CMD sed -i “s/80/$PORT/g” ./000-default.conf
+CMD sed -i “s/80/${PORT}/g” ./000-default.conf
