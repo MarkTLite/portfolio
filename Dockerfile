@@ -1,15 +1,11 @@
-FROM composer AS composer
+FROM php:7-apache
 
-# copying the source directory and install the dependencies with composer
-COPY MarkTLite/portfolio/ /app
+COPY 000-default.conf /etc/apache2/sites-available/000-default.conf
+COPY start-apache /usr/local/bin
+RUN a2enmod rewrite
 
-# run composer install to install the dependencies
-RUN composer install \
-  --optimize-autoloader \
-  --no-interaction \
-  --no-progress
+# Copy application source
+COPY src /var/www/
+RUN chown -R www-data:www-data /var/www
 
-# continue stage build with the desired image and copy the source including the
-# dependencies downloaded by composer
-FROM trafex/php-nginx
-COPY --chown=nginx --from=composer /app /var/www/html
+CMD ["start-apache"]
