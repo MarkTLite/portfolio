@@ -1,11 +1,19 @@
-FROM php:7-apache
+FROM composer:1.9.3 as vendor
 
-COPY 000-default.conf /etc/apache2/sites-available/000-default.conf
-COPY start-apache /usr/local/bin
-RUN a2enmod rewrite
+WORKDIR /tmp/
 
-# Copy application source
-COPY src /var/www/
-RUN chown -R www-data:www-data /var/www
+COPY composer.json composer.json
+COPY composer.lock composer.lock
 
-CMD ["start-apache"]
+RUN composer install \
+    --ignore-platform-reqs \
+    --no-interaction \
+    --no-plugins \
+    --no-scripts \
+    --prefer-dist
+
+
+FROM php:7.2-apache-stretch
+
+COPY . /var/www/html
+COPY --from=vendor /tmp/vendor/ /var/www/html/vendor/
