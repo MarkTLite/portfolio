@@ -1,6 +1,6 @@
 FROM composer AS composer
 
-ENV PORT $PORT
+ENV PORT 3000
 
 # copying the source directory and install the dependencies with composer
 COPY ./ /app
