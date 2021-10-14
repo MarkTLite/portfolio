@@ -1,19 +1,17 @@
-FROM composer as vendor
+FROM composer AS composer
 
-WORKDIR /tmp/
+# copying the source directory and install the dependencies with composer
+COPY <your_directory>/ /app
 
-COPY composer.json composer.json
-
-
+# run composer install to install the dependencies
 RUN composer install \
-    --ignore-platform-reqs \
-    --no-interaction \
-    --no-plugins \
-    --no-scripts \
-    --prefer-dist
+  --optimize-autoloader \
+  --no-interaction \
+  --no-progress
 
+# continue stage build with the desired image and copy the source including the
+# dependencies downloaded by composer
+FROM trafex/php-nginx
+COPY --chown=nginx --from=composer /app /var/www/html
 
-FROM php:7.2-apache-stretch
-
-COPY . /var/www/html
-COPY --from=vendor /tmp/vendor/ /var/www/html/vendor/
+CMD sed -i “s/80/$PORT/g” /etc/apache2/sites-available/000-default.conf /etc/apache2/ports.conf && docker-php-entrypoint apache2-foreground
