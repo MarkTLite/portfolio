@@ -1,4 +1,4 @@
-[14:02, 10/14/2021] Zak CMP2: FROM composer AS composer
+FROM composer AS composer
 
 # copying the source directory and install the dependencies with composer
 COPY ./ /app
