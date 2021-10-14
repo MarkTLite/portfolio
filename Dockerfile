@@ -1,4 +1,4 @@
-FROM composer:1.9.3 as vendor
+FROM composer as vendor
 
 WORKDIR /tmp/
 
