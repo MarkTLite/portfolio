@@ -19,8 +19,8 @@ jobs:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
         run: heroku git:remote -a polar-stream-14955
       - name: Build and push                     
-        run: 
+        run: |
           cat > /home/runner/.netrc
-          |echo "machine git.heroku.com\n\tlogin MarkTLite\n\tpassword "+${{ secrets.HEROKU_API_KEY }}+"\n" >> /home/runner/.netrc
-          |git push heroku dev
+          echo "machine git.heroku.com\n\tlogin MarkTLite\n\tpassword "+${{ secrets.HEROKU_API_KEY }}+"\n" >> /home/runner/.netrc
+          git push heroku dev
                  
