@@ -1,4 +1,4 @@
-name: Deploy to Heroku
+name: Deploy Container to Heroku
 on: 
   push:
     branches:
@@ -10,17 +10,16 @@ jobs:
       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
       - uses: actions/checkout@v2
       - run: git checkout dev      
-      - name: Login to Heroku 
+      - name: Login to Heroku Container Registry 
         env: 
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-        run: heroku auth:token         
+        run: heroku container:login         
       - name: Build and push
         env:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-        run: heroku git:remote -a polar-stream-14955
-      - name: Build and push                     
-        run: |
-          cat > /home/runner/.netrc
-          echo "machine git.heroku.com\n\tlogin MarkTLite\n\tpassword "+${{ secrets.HEROKU_API_KEY }}+"\n" >> /home/runner/.netrc
-          git push heroku dev
+        run: heroku container:push -a ${{ secrets.HEROKU_APP_NAME }} web
+      - name: Release                     
+        env:
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+        run: heroku container:release -a ${{ secrets.HEROKU_APP_NAME }} web
                  
