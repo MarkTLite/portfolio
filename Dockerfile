@@ -1,17 +1,6 @@
-FROM composer AS composer
-
-ENV PORT 3000
-
-# copying the source directory and install the dependencies with composer
-COPY ./ /app
-
-# run composer install to install the dependencies
-RUN composer install \
-  --optimize-autoloader \
-  --no-interaction \
-  --no-progress
-
-# continue stage build with the desired image and copy the source including the
-# dependencies downloaded by composer
-FROM trafex/php-nginx
-COPY --chown=nginx --from=composer /app /var/www/html
+FROM ubuntu
+RUN apt-get update
+RUN apt-get install nginx -y
+COPY index.html /var/www/html/
+EXPOSE 80
+CMD ["nginx","-g","daemon off;"
