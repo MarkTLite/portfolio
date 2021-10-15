@@ -1,5 +1,5 @@
 FROM ubuntu
-RUN apt-get update
+RUN sudo apt-get update
 RUN apt-get install nginx -y
 COPY index.php /var/www/html/
 EXPOSE 80
