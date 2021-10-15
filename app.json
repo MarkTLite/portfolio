@@ -1,0 +1,5 @@
+{
+  "name": "polar-stream-14955",
+  "description": "An example app.json for heroku-docker",
+  "image": "heroku/php"
+}
